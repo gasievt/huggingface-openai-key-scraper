@@ -17,6 +17,4 @@ foreach($keys[0] as $key){
     fwrite($fd, $key . PHP_EOL);
     fclose($fd);
 }
-
-
 ?>

@@ -10,4 +10,15 @@ foreach($chars as $char){
     }
 }
 
+do{
+    $output = shell_exec('ps -C php -f');
+    if (strpos($output, 'get_keys.php') !== false){
+        echo "Please wait..." . PHP_EOL;
+    }
+    else{
+        echo "Done!" . PHP_EOL;
+    }
+    sleep(1);
+}while(strpos($output, 'get_keys.php') !== false);
+
 ?>
