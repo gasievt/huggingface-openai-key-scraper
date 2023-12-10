@@ -4,7 +4,7 @@ $chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 
 $path = __DIR__ . '/get_keys.php';
 foreach($chars as $char){
     for($i=0; $i<=1000; $i+=100){
-        echo $char . ' ' . $i . PHP_EOL;
+        echo "Scraping: $char char" . ' ' . "Page № $i" . PHP_EOL;
         $command = "php $path --char=$char --index=$i > /dev/null &";
         exec($command);
     }
