@@ -1,2 +1,6 @@
-Works only on Linux.
-To run: php scraper.php
+Works only on Linux. <br />
+To run: <br /> 
+```properties
+php scraper.php
+```  
+
