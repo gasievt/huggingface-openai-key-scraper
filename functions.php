@@ -19,4 +19,9 @@ function isValidKey($output){
         return false;
     }
 }
+
+function cleanupFile($file){
+    $fd = fopen($file, 'w');
+    fclose($fd);
+}
 ?>

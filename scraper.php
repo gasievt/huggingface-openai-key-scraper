@@ -4,8 +4,7 @@ $chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 
 '1','2','3','4','5','6','7','8','9','0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 $path = __DIR__;
 
-$fd = fopen('keys.txt', 'w');
-fclose($fd);
+cleanupFile('keys.txt');
 foreach($chars as $char){
     for($i=0; $i<=1000; $i+=100){
         echo "Scraping: $char char" . ' ' . "Page № $i" . PHP_EOL;
@@ -25,8 +24,7 @@ do{
     }
 }while(!$flag);
 
-$fd = fopen('uniqueKeys.txt', 'w');
-fclose($fd);
+cleanupFile('uniqueKeys.txt');
 $uniqueKeys = array_unique(explode(PHP_EOL, file_get_contents('keys.txt')));
 foreach($uniqueKeys as $key){
     echo "Validating $key" . PHP_EOL;
