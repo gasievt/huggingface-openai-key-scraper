@@ -11,13 +11,16 @@ function isScriptsRunning($scriptName){
     }
 }
 
-function isValidKey($output){
-    if(array_key_exists('data', json_decode($output, true))){
-        return true;
-    }
-    else{
-        return false;
-    }
+function isValidKeyKey($ch){
+    if (!curl_errno($ch)) {
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        switch ($httpCode) {
+          case 200:
+              return true;
+          default:
+              return false;
+        }
+      }
 }
 
 function cleanupFile($file){
