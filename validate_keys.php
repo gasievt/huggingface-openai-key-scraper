@@ -11,7 +11,7 @@
     ];
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_exec($ch);
-    if(isValidKeyKey($ch)){
+    if(isValidKey($ch)){
         $fd = fopen('uniqueKeys.txt', 'a+');
         fwrite($fd, $key . PHP_EOL);
         fclose($fd);

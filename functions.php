@@ -11,7 +11,7 @@ function isScriptsRunning($scriptName){
     }
 }
 
-function isValidKeyKey($ch){
+function isValidKey($ch){
     if (!curl_errno($ch)) {
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         switch ($httpCode) {
