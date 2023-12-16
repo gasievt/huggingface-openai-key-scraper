@@ -24,7 +24,6 @@ do{
     }
 }while(!$flag);
 
-cleanupFile('uniqueKeys.txt');
 $uniqueKeys = array_unique(explode(PHP_EOL, file_get_contents('keys.txt')));
 foreach($uniqueKeys as $key){
     echo "Validating $key" . PHP_EOL;

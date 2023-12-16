@@ -1,5 +1,5 @@
 <?php
-
+$models = ['gpt-3.5-turbo', 'gpt-4'];
 function isScriptsRunning($scriptName){
     $output = shell_exec('ps -C php -f');
     if (strpos($output, $scriptName) !== false){
@@ -17,7 +17,7 @@ function isValidKey($ch){
         switch ($httpCode) {
           case 200:
               return true;
-          default:
+          default: 
               return false;
         }
       }
