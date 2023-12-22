@@ -1,5 +1,4 @@
 <?php
-set_time_limit(60);
 $keys = [];
 $pattern = '/(sk-\w)<\/span>([a-zA-Z0-9]{47})/';
 $char = explode('--char=', $argv[1])[1];

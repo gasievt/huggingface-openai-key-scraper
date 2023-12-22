@@ -1,6 +1,5 @@
 <?php
     include "./functions.php";
-    set_time_limit(60);
     $key = explode('--key=', $argv[1])[1];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://api.openai.com/v1/chat/completions");
