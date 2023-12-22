@@ -27,4 +27,12 @@ function cleanupFile($file){
     $fd = fopen($file, 'w');
     fclose($fd);
 }
+
+function pleaseWaitAnimation($message){
+    $animation = ['|','/','-','\\','\\'];
+    foreach($animation as $char){
+        echo $message . "[".$char."]"."\r";
+        usleep(20000);
+    }
+}
 ?>
