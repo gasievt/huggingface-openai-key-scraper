@@ -9,11 +9,10 @@ curl_setopt($ch, CURLOPT_URL, "https://huggingface.co/search/full-text?q=sk-$cha
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($ch);
 preg_match_all($pattern, $output, $keys);
-
+$fd = fopen('keys.txt', 'a+');
 foreach($keys[0] as $key){
     $key = str_replace('</span>', '', $key);
-    $fd = fopen('keys.txt', 'a+');
     fwrite($fd, $key . PHP_EOL);
-    fclose($fd);
 }
+fclose($fd);
 ?>
