@@ -6,6 +6,7 @@ $index = explode('--index=', $argv[2])[1];
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://huggingface.co/search/full-text?q=sk-$char&limit=100&skip=$index");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_TIMEOUT, 90);
 $output = curl_exec($ch);
 preg_match_all($pattern, $output, $keys);
 $fd = fopen('keys.txt', 'a+');
