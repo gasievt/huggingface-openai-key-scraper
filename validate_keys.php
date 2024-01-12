@@ -15,7 +15,9 @@
             json_encode(['model'=>$model,
              'messages'=>[['role'=>'user', 'content'=>'Hi']],
              'temperature'=>0.7]));
-        curl_exec($ch);
+        if(curl_exec($ch)===false){
+            throw new Exception(curl_error($ch));   
+        }
         if(isValidKey($ch)){
             $fd = fopen("$model.txt", 'a+');
             fwrite($fd, $key . PHP_EOL);
