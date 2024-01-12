@@ -35,10 +35,4 @@ function pleaseWaitAnimation($message){
         usleep(20000);
     }
 }
-
-function isFileEmpty($file){
-    if(filesize($file)===0){
-        throw new Exception("File is empty");
-    }
-}
 ?>

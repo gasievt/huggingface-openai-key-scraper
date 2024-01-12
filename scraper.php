@@ -2,6 +2,7 @@
 include "./functions.php";
 $chars = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'));
 $path = __DIR__;
+
 foreach($chars as $char){
     for($i=0; $i<=1000; $i+=100){
         echo "Scraping: $char char" . ' ' . "Page № $i" . PHP_EOL;
@@ -20,7 +21,7 @@ do{
         $flag = true;
     }
 }while(!$flag);
-isFileEmpty('keys.txt');
+
 $uniqueKeys = array_unique(explode(PHP_EOL, file_get_contents('keys.txt')));
 cleanupFile('keys.txt');
 foreach($uniqueKeys as $key){
