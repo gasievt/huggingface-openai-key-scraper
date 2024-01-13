@@ -41,4 +41,10 @@ function isFileEmpty($file){
         throw new Exception("File is empty");
     }
 }
+
+function ifSlowModeDelay($mode){
+    if($mode==='slow'){
+        return usleep(50000);
+    }
+}
 ?>

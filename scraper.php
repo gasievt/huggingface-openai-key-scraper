@@ -1,5 +1,24 @@
 <?php
 include "./functions.php";
+$mode = 'default';
+while(sizeof($argv)>0){
+    $flag = array_shift($argv);
+    switch ($flag){
+        case '-mode':{
+            if(sizeof($argv)===0){
+                echo "ERROR: No value was provided for flag $flag" . PHP_EOL;
+                die();
+            }
+            global $mode;
+            $arg = array_shift($argv);
+            switch($arg){
+                case 'slow':{
+                   $mode = 'slow';
+                }
+            }
+        }
+    }
+}
 $chars = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'));
 $path = __DIR__;
 foreach($chars as $char){
@@ -7,6 +26,7 @@ foreach($chars as $char){
         echo "Scraping: $char char" . ' ' . "Page № $i" . PHP_EOL;
         $command = "php $path/get_keys.php --char=$char --index=$i > /dev/null &";
         exec($command);
+        ifSlowModeDelay($mode);
     }
 }
 
@@ -27,6 +47,7 @@ foreach($uniqueKeys as $key){
     echo "Validating $key" . PHP_EOL;
     $command = "php $path/validate_keys.php --key=$key > /dev/null &";
     exec($command);
+    ifSlowModeDelay($mode);
 }
 
 do{
