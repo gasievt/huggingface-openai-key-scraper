@@ -47,4 +47,3 @@ function ifSlowModeDelay($mode){
         return usleep(50000);
     }
 }
-?>

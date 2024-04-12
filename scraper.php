@@ -15,6 +15,9 @@ while(sizeof($argv)>0){
                 case 'slow':{
                    $mode = 'slow';
                 }
+                default:
+                    echo "ERROR: No such mode: $arg" . PHP_EOL;
+                    die();
             }
         }
     }
@@ -60,5 +63,3 @@ do{
         $flag = true;
     }
 }while(!$flag);
-
-?>
