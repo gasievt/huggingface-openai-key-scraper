@@ -14,6 +14,7 @@ while(sizeof($argv)>0){
             switch($arg){
                 case 'slow':{
                    $mode = 'slow';
+                   break;
                 }
                 default:
                     echo "ERROR: No such mode: $arg" . PHP_EOL;
