@@ -1,4 +1,4 @@
-Works only on Linux. <br />
+Works both on Windows and Linux. <br />
 To run:
 ```properties
 php scraper.php
