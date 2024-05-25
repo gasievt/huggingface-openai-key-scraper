@@ -1,6 +1,7 @@
 <?php
 include "./functions.php";
 $mode = 'default';
+$OS = getOs(); //true is win
 while(sizeof($argv)>0){
     $flag = array_shift($argv);
     switch ($flag){
@@ -28,8 +29,15 @@ $path = __DIR__;
 foreach($chars as $char){
     for($i=0; $i<=1000; $i+=100){
         echo "Scraping: $char char" . ' ' . "Page № $i" . PHP_EOL;
-        $command = "php $path/get_keys.php --char=$char --index=$i > /dev/null &";
-        exec($command);
+        $command = '';
+        if($OS){
+            $command = "php $path/get_keys.php --char=$char --index=$i > NUL:";
+            proc_open($command, [], $pipe);
+        }
+        else{
+            $command = "php $path/get_keys.php --char=$char --index=$i > /dev/null &";
+            exec($command);
+        }
         ifSlowModeDelay($mode);
     }
 }
@@ -49,8 +57,15 @@ $uniqueKeys = array_unique(explode(PHP_EOL, file_get_contents('keys.txt')));
 cleanupFile('keys.txt');
 foreach($uniqueKeys as $key){
     echo "Validating $key" . PHP_EOL;
-    $command = "php $path/validate_keys.php --key=$key > /dev/null &";
-    exec($command);
+    $command = '';
+    if($OS){
+        $command = "php $path/validate_keys.php --key=$key > NUL:";
+        proc_open($command, [], $pipe);
+    }
+    else{
+        $command = "php $path/validate_keys.php --key=$key > /dev/null &";
+        exec($command);
+    }
     ifSlowModeDelay($mode);
 }
 

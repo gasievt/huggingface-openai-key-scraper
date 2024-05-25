@@ -1,7 +1,21 @@
 <?php
 $models = ['gpt-3.5-turbo', 'gpt-4'];
+
+function getOs(){
+    if(strpos(php_uname(),'Windows')!==false || strpos(php_uname(),'WINNT')!==false){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 function isScriptsRunning($scriptName){
-    $output = shell_exec('ps -C php -f');
+    if(getOs()){
+        $output = shell_exec('wmic process where "name like \'php%\'" get processid,commandline');
+    }
+    else{
+        $output = shell_exec('ps -C php -f');
+    }
     if (strpos($output, $scriptName) !== false){
         sleep(1);
         return true;
