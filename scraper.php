@@ -1,19 +1,25 @@
 <?php
 include "./functions.php";
 $mode = 'default';
-$OS = getOs(); //true is win
-while(sizeof($argv)>0){
+$OS = getOs(); //true is windows
+while (count($argv) > 0)
+{
     $flag = array_shift($argv);
-    switch ($flag){
-        case '-mode':{
-            if(sizeof($argv)===0){
+    switch ($flag)
+    {
+        case '-mode':
+        {
+            if (count($argv)===0)
+            {
                 echo "ERROR: No value was provided for flag $flag" . PHP_EOL;
                 die();
             }
             global $mode;
             $arg = array_shift($argv);
-            switch($arg){
-                case 'slow':{
+            switch ($arg) 
+            {
+                case 'slow':
+                {
                    $mode = 'slow';
                    break;
                 }
@@ -24,17 +30,21 @@ while(sizeof($argv)>0){
         }
     }
 }
-$chars = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'));
+$chars = array_merge(range('a', 'z'), range('0', '9'));
 $path = __DIR__;
-foreach($chars as $char){
-    for($i=0; $i<=1000; $i+=100){
+foreach ($chars as $char)
+{
+    for ($i=0; $i<=1000; $i+=100)
+    {
         echo "Scraping: $char char" . ' ' . "Page № $i" . PHP_EOL;
         $command = '';
-        if($OS){
+        if ($OS)
+        {
             $command = "php $path/get_keys.php --char=$char --index=$i > NUL:";
             proc_open($command, [], $pipe);
         }
-        else{
+        else
+        {
             $command = "php $path/get_keys.php --char=$char --index=$i > /dev/null &";
             exec($command);
         }
@@ -42,40 +52,47 @@ foreach($chars as $char){
     }
 }
 
-do{
+do {
     $flag = false;
-    if(isScriptsRunning('get_keys.php')){
+    if (isScriptsRunning('get_keys.php'))
         pleaseWaitAnimation('Please wait');
-    }
-    else{
+    else
+    {
         echo PHP_EOL .'Done!' . PHP_EOL;
         $flag = true;
     }
-}while(!$flag);
+}
+while (!$flag);
+
 isFileEmpty('keys.txt');
 $uniqueKeys = array_unique(explode(PHP_EOL, file_get_contents('keys.txt')));
 cleanupFile('keys.txt');
-foreach($uniqueKeys as $key){
+
+foreach ($uniqueKeys as $key)
+{
     echo "Validating $key" . PHP_EOL;
     $command = '';
-    if($OS){
+    if ($OS)
+    {
         $command = "php $path/validate_keys.php --key=$key > NUL:";
         proc_open($command, [], $pipe);
     }
-    else{
+    else
+    {
         $command = "php $path/validate_keys.php --key=$key > /dev/null &";
         exec($command);
     }
     ifSlowModeDelay($mode);
 }
 
-do{
+do {
     $flag = false;
-    if(isScriptsRunning('validate_keys.php')){
+    if (isScriptsRunning('validate_keys.php'))
         pleaseWaitAnimation("Validating keys");
-    }
-    else{
+    else
+    {
         echo PHP_EOL . 'Done!' . PHP_EOL;
         $flag = true;
     }
-}while(!$flag);
+}
+while (!$flag);
